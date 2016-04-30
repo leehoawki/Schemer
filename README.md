@@ -9,11 +9,25 @@ A Scheme interpreter in Haskell based on
 
 ## Build
 
-	ghc -package parsec -o Schemer Schemer.hs
+    ghc -package parsec -o Schemer Schemer.hs
     ./Schemer "(+ 1 2)"
     3
 
 ## Features
 1. REPL supported.
-2. Standard Lib provided.
-3. TODO
+2. Standard library provided.
+3. IO functions provided.
+
+## Samples
+
+    ./Schemer
+    Scheme> (define (factorial x) (if (= x 1) 1 (* x (factorial (- x 1)))))
+    (lambda ("x") ...)
+    Scheme> (factorial 10)
+    3628800
+    Scheme> (load "stdlib.scm")
+    (lambda ("pred" . lst) ...)
+    Scheme> (map (curry + 2) '(1 2 3 4))
+    (3 4 5 6)
+    Scheme> (filter even? '(1 2 3 4))
+    (2 4)
