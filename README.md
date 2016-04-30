@@ -9,7 +9,7 @@ A Scheme interpreter in Haskell based on
 
 ## Build
 
-    ghc -package parsec -o Schemer Schemer.hs
+    ghc -o Schemer Schemer.hs
     ./Schemer "(+ 1 2 3 4)"
     10
 

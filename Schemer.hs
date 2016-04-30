@@ -114,7 +114,6 @@ parseExpr = parseAtom
                 char ')'
                 return x
 
-
 readExpr :: String -> ThrowsError LispVal
 readExpr input = case parse parseExpr "Schemer" input of
     Left err -> throwError $ Parser err
