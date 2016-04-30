@@ -10,8 +10,8 @@ A Scheme interpreter in Haskell based on
 ## Build
 
     ghc -package parsec -o Schemer Schemer.hs
-    ./Schemer "(+ 1 2)"
-    3
+    ./Schemer "(+ 1 2 3 4)"
+    10
 
 ## Features
 1. REPL supported.
@@ -27,7 +27,5 @@ A Scheme interpreter in Haskell based on
     3628800
     Scheme> (load "stdlib.scm")
     (lambda ("pred" . lst) ...)
-    Scheme> (map (curry + 2) '(1 2 3 4))
-    (3 4 5 6)
     Scheme> (filter even? '(1 2 3 4))
     (2 4)
