@@ -27,5 +27,5 @@ A Scheme interpreter in Haskell based on
     3628800
     Scheme> (load "stdlib.scm")
     (lambda ("pred" . lst) ...)
-    Scheme> (filter even? '(1 2 3 4))
-    (2 4)
+    Scheme> (list 1 2 3 4)
+    (1 2 3 4)
