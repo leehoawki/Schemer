@@ -13,8 +13,7 @@ data LispVal = Atom String
              | String String
              | Bool Bool
              | PrimitiveFunc ([LispVal] -> ThrowsError LispVal)
-             | Func { params :: [String], vararg :: (Maybe String),
-                      body :: [LispVal], closure :: Env }
+             | Func { params :: [String], vararg :: (Maybe String), body :: [LispVal], closure :: Env }
              | IOFunc ([LispVal] -> IOThrowsError LispVal)
              | Port Handle   
 
@@ -61,10 +60,8 @@ showError :: LispError -> String
 showError (UnboundVar message varname)  = message ++ ": " ++ varname
 showError (BadSpecialForm message form) = message ++ ": " ++ show form
 showError (NotFunction message func)    = message ++ ": " ++ show func
-showError (NumArgs expected found)      = "Expected " ++ show expected 
-                                       ++ " args; found values " ++ unwordsList found
-showError (TypeMismatch expected found) = "Invalid type: expected " ++ expected
-                                       ++ ", found " ++ show found
+showError (NumArgs expected found)      = "Expected " ++ show expected ++ " args; found values " ++ unwordsList found
+showError (TypeMismatch expected found) = "Invalid type: expected " ++ expected ++ ", found " ++ show found
 showError (Parser parseErr)             = "Parse error at " ++ show parseErr
 
 -- Paser
@@ -83,7 +80,6 @@ parseString = do char '"'
 
 parseNumber :: Parser LispVal
 parseNumber = many1 digit >>= return . Number . read
-
 
 parseList :: Parser LispVal
 parseList = liftM List $ sepBy parseExpr spaces
