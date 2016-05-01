@@ -21,11 +21,11 @@ A Scheme interpreter in Haskell based on
 ## Samples
 
     ./Schemer
-    Scheme> (define (factorial x) (if (= x 1) 1 (* x (factorial (- x 1)))))
+    Schemer> (define (factorial x) (if (= x 1) 1 (* x (factorial (- x 1)))))
     (lambda ("x") ...)
-    Scheme> (factorial 10)
+    Schemer> (factorial 10)
     3628800
-    Scheme> (load "stdlib.scm")
+    Schemer> (load "stdlib.scm")
     (lambda ("pred" . lst) ...)
-    Scheme> (list 1 2 3 4)
+    Schemer> (list 1 2 3 4)
     (1 2 3 4)
