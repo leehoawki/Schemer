@@ -81,7 +81,6 @@ parseString = do char '"'
                  char '"'
                  return $ String x
 
-
 parseNumber :: Parser LispVal
 parseNumber = many1 digit >>= return . Number . read
 
@@ -105,7 +104,6 @@ parseBool :: Parser LispVal
 parseBool = do
     char '#'
     (char 't' >> return (Bool True)) <|> (char 'f' >> return (Bool False))
-
 
 parseExpr :: Parser LispVal
 parseExpr = parseAtom
