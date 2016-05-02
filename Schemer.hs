@@ -246,19 +246,6 @@ trapError action = catchError action (return . show)
 extractValue :: ThrowsError a -> a
 extractValue (Right val) = val
 
-flushStr :: String -> IO ()
-flushStr str = putStr str >> hFlush stdout
-
-readPrompt :: String -> IO String
-readPrompt prompt = flushStr prompt >> getLine
-
-until_ :: Monad m => (a -> Bool) -> m a -> (a -> m ()) -> m ()
-until_ pred prompt action = do 
-   result <- prompt
-   if pred result 
-      then return ()
-      else action result >> until_ pred prompt action
-
 nullEnv :: IO Env
 nullEnv = newIORef []
 
@@ -337,11 +324,32 @@ makeNormalFunc = makeFunc Nothing
 makeVarArgs = makeFunc . Just . showVal
 
 -- Main
+trim :: String -> String
+trim = dropWhile isSpace
+    where isSpace = (== ' ')
+
+flushStr :: String -> IO ()
+flushStr str = putStr str >> hFlush stdout
+
+readPrompt :: String -> IO String
+readPrompt prompt = flushStr prompt >> getLine
+
+until_ :: Monad m => (a -> Bool) -> m a -> (a -> m ()) -> m ()
+until_ pred prompt action = do 
+   result <- prompt
+   if pred result 
+      then return ()
+      else action result >> until_ pred prompt action
+
 runOne :: String -> IO ()
 runOne expr = primitiveBindings >>= flip evalAndPrint expr
 
 runRepl :: IO ()
-runRepl = primitiveBindings >>= until_ (== "quit") (readPrompt "Schemer> ") . evalAndPrint
+runRepl = primitiveBindings >>= until_ (== "quit") (readPrompt "Schemer> ") . evalRepl
+
+evalRepl :: Env -> String -> IO ()
+evalRepl env expr = do case (trim expr) of "" -> return ()
+                                           otherwise -> evalString env expr >>= putStrLn
 
 main :: IO ()
 main = do args <- getArgs
