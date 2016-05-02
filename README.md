@@ -27,5 +27,5 @@ A Scheme interpreter in Haskell based on
     3628800
     Schemer> (load "stdlib.scm")
     (lambda ("pred" . lst) ...)
-    Schemer> (list 1 2 3 4)
-    (1 2 3 4)
+    Schemer> (sum 1 2 3 4)
+    10
