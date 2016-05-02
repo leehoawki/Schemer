@@ -388,8 +388,8 @@ runRepl :: IO ()
 runRepl = primitiveBindings >>= until_ (== "quit") (readPrompt "Schemer> ") . evalRepl
 
 evalRepl :: Env -> String -> IO ()
-evalRepl env expr = let exp = (trim expr) in do case (trim expr) of "" -> return ()
-                                                                    otherwise -> evalString env exp >>= putStrLn
+evalRepl env expr = let exp = (trim expr) in do case exp of "" -> return ()
+                                                            otherwise -> evalString env exp >>= putStrLn
 main :: IO ()
 main = do args <- getArgs
           case length args of
