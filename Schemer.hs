@@ -113,7 +113,7 @@ parseExpr = parseAtom
                 return x
 
 readOrThrow :: Parser a -> String -> ThrowsError a
-readOrThrow parser input = case parse parser "lisp" input of
+readOrThrow parser input = case parse parser "Schemer" input of
     Left err  -> throwError $ Parser err
     Right val -> return val
 
